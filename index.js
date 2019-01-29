@@ -3,7 +3,7 @@
 const scoreThrows = (array) => {
   // input validation
   if (!Array.isArray(array)) {
-    return 'scoreThrows expected an array';
+    throw new TypeError('scoreThrows expected an array');
   } else if (!array.length) {
     return -1;
   }
@@ -13,9 +13,9 @@ const scoreThrows = (array) => {
   const invalidType = array.filter(x => { return typeof x !== 'number' });
 
   if (invalidScores.length) {
-    return 'One of your scores was greater than 20';
+    throw new TypeError('One of your scores was greater than 20');
   } else if (invalidType.length) {
-    return 'scoreThrows expected numbers as scores';
+    throw new TypeError('scoreThrows expected numbers as scores');
   }
   
   let points = 0;
