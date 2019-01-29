@@ -1,14 +1,21 @@
 'use strict';
 
 const scoreThrows = (array) => {
-  let points = 0;
-
   // input validation
   if (!Array.isArray(array)) {
     return 'scoreThrows expected an array';
   } else if (!array.length) {
     return -1;
   }
+
+  // score validation
+  const invalidScores = array.filter(x => { return x > 20 });
+
+  if (invalidScores.length) {
+    return 'One of your scores was greater than 20';
+  }
+  
+  let points = 0;
 
   // if all throws are < 5 then add 100 to points:
   const lessThanFive = array.filter(x => { return x < 5 });
