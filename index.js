@@ -3,8 +3,11 @@
 const scoreThrows = (array) => {
   let points = 0;
 
+  // input validation
   if (!Array.isArray(array)) {
     return 'scoreThrows expected an array';
+  } else if (!array.length) {
+    return -1;
   }
 
   // if all throws are < 5 then add 100 to points:
@@ -30,9 +33,5 @@ const scoreThrows = (array) => {
 
   return points;
 }
-
-console.log(
-  scoreThrows([1, 2, 1, 4, 4, 2])
-  );
 
 module.exports = scoreThrows;
