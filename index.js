@@ -10,9 +10,12 @@ const scoreThrows = (array) => {
 
   // score validation
   const invalidScores = array.filter(x => { return x > 20 });
+  const invalidType = array.filter(x => { return typeof x !== 'number' });
 
   if (invalidScores.length) {
     return 'One of your scores was greater than 20';
+  } else if (invalidType.length) {
+    return 'scoreThrows expected numbers as scores';
   }
   
   let points = 0;

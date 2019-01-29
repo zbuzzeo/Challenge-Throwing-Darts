@@ -14,6 +14,9 @@ describe('scoreThrows', () => {
   it('should only accept scores less than 20', () => {
     expect(scoreThrows([15, 20, 30])).to.deep.equal( 'One of your scores was greater than 20');
   });
+  it('should only accept numbers as scores', () => {
+    expect(scoreThrows([1, '2', 3])).to.deep.equal('scoreThrows expected numbers as scores');
+  });
   it('should return -1 with an empty collection', () => {
     expect(scoreThrows([])).to.deep.equal(-1);
   });
