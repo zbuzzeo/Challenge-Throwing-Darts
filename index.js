@@ -1,47 +1,44 @@
 'use strict';
 
 const scoreThrows = (array) => {
-  // input validation
   if (!Array.isArray(array)) {
-    throw new TypeError('scoreThrows expected an array');
-  } else if (!array.length) {
+    throw new Error('scoreThrows expected an array');
+  }
+
+  if (!array.length) {
     return -1;
   }
 
-  // score validation
-  const invalidScores = array.filter(x => { return x > 20 });
-  const invalidType = array.filter(x => { return typeof x !== 'number' });
-
-  if (invalidScores.length) {
-    throw new TypeError('One of your scores was greater than 20');
-  } else if (invalidType.length) {
-    throw new TypeError('scoreThrows expected numbers as scores');
+  if (Math.max(...array) > 20) {
+    throw new Error('At least one of your scores was above 20');
   }
-  
+
+  const filtered = array.filter(x => {
+    return typeof x === 'number';
+  });
+
+  if (filtered.length !== array.length) {
+    throw new Error('scoreThrows expected numbers as scores');
+  }
+
+  const scoresLessThanTen = array.filter(x => x <= 10);
   let points = 0;
 
-  // if all throws are < 5 then add 100 to points:
-  const lessThanFive = array.filter(x => { return x < 5 });
-
-  // compare the length of both arrays to see if all values passed the filter.
-  if (lessThanFive.length === array.length) {
+  if (Math.max(...array) < 5) {
     points += 100;
   }
 
-  // reduce all of the values to a sum based on their point-values.
-  const calcPoints = array.reduce((sum, x) => {
-    if (x <= 10 && x >= 5) {
+  const calculatedScores = scoresLessThanTen.reduce((sum, score) => {
+    if (score <= 10 && score >= 5) {
       sum += 5;
-    } else if (x < 5) {
+    } else if (score < 5) {
       sum += 10;
     }
 
     return sum;
   }, 0);
 
-  points += calcPoints;
-
-  return points;
+  return points += calculatedScores;
 }
 
 module.exports = scoreThrows;

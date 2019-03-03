@@ -12,7 +12,7 @@ describe('scoreThrows', () => {
     expect(() => scoreThrows({})).to.throw('scoreThrows expected an array');
   });
   it('should only accept scores less than 20', () => {
-    expect(() => scoreThrows([15, 20, 30])).to.throw('One of your scores was greater than 20');
+    expect(() => scoreThrows([15, 20, 30])).to.throw('At least one of your scores was above 20');
   });
   it('should only accept numbers as scores', () => {
     expect(() => scoreThrows([1, '2', 3])).to.throw('scoreThrows expected numbers as scores');
